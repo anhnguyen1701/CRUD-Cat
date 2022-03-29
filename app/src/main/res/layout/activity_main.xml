@@ -62,8 +62,21 @@
             android:text="Update"
             android:textSize="14dp"></Button>
 
-
+        <Button
+            android:id="@+id/btnAll"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="Get All"
+            android:layout_marginLeft="20dp"
+            android:textSize="12dp"></Button>
     </LinearLayout>
+
+    <SearchView
+        android:id="@+id/search"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:iconifiedByDefault="false"
+        android:queryHint="Search View"></SearchView>
 
     <androidx.recyclerview.widget.RecyclerView
         android:id="@+id/recycleView"

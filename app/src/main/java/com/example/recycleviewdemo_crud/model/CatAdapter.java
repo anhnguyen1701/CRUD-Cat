@@ -22,10 +22,12 @@ public class CatAdapter extends RecyclerView.Adapter<CatAdapter.CatViewHolder> {
     private Context context;
     private List<Cat> mList;
     private CatItemListener mCatItem;
+    private List<Cat> listBackup;
 
     public CatAdapter(Context context) {
         this.context = context;
         this.mList = new ArrayList<>();
+        this.listBackup = new ArrayList<>();
     }
 
     public void setClickListener(CatItemListener mCatItem) {
@@ -60,6 +62,7 @@ public class CatAdapter extends RecyclerView.Adapter<CatAdapter.CatViewHolder> {
                 builder.setPositiveButton("Yes", new DialogInterface.OnClickListener() {
                     @Override
                     public void onClick(DialogInterface dialogInterface, int i) {
+                        listBackup.remove(holder.getAdapterPosition());
                         mList.remove(holder.getAdapterPosition());
                         notifyDataSetChanged();
                     }
@@ -80,6 +83,10 @@ public class CatAdapter extends RecyclerView.Adapter<CatAdapter.CatViewHolder> {
 
     }
 
+    public List<Cat> getBackup() {
+        return this.listBackup;
+    }
+
     @Override
     public int getItemCount() {
         if (mList != null) {
@@ -93,12 +100,19 @@ public class CatAdapter extends RecyclerView.Adapter<CatAdapter.CatViewHolder> {
     }
 
     public void add(Cat c) {
+        listBackup.add(c);
         mList.add(c);
         notifyDataSetChanged();
     }
 
     public void update(int position, Cat cat) {
+        listBackup.set(position, cat);
         mList.set(position, cat);
+        notifyDataSetChanged();
+    }
+
+    public void filterList(List<Cat> filterList) {
+        mList = filterList;
         notifyDataSetChanged();
     }
 
